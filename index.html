@@ -308,12 +308,14 @@ const next = document.getElementById("nextBtn");
 const music = document.getElementById("bgMusic");
 const toggle = document.getElementById("musicToggle");
 
-function tryPlayMusic() {
-    music.play().then(() => {
-        toggle.classList.remove("paused");
-    }).catch(() => {});
+// Play music if not playing (triggered by clicks)
+function triggerMusic() {
+    if (music.paused) {
+        music.play().then(() => toggle.classList.remove("paused")).catch(()=>{});
+    }
 }
 
+// Toggle pause/play via music button only
 toggle.onclick = () => {
     if (music.paused) {
         music.play();
@@ -324,20 +326,23 @@ toggle.onclick = () => {
     }
 };
 
+// Page navigation
 function update() {
     pages.style.transform = `translateX(-${page * 50}%)`;
     prev.classList.toggle("hidden", page === 0);
     next.classList.toggle("hidden", page === 1);
-    tryPlayMusic();
 }
 
-next.onclick = () => { page = 1; update(); };
-prev.onclick = () => { page = 0; update(); };
+next.onclick = () => { page = 1; update(); triggerMusic(); };
+prev.onclick = () => { page = 0; update(); triggerMusic(); };
 
-// Autoplay attempt
-window.addEventListener("load", tryPlayMusic);
-document.addEventListener("click", tryPlayMusic, { once:true });
-document.addEventListener("touchstart", tryPlayMusic, { once:true });
+// Trigger music for RSVP button
+document.querySelector(".rsvp-form button").addEventListener("click", triggerMusic);
+
+// Optional: trigger on all clickable elements (arrows, form inputs, selects)
+document.querySelectorAll("button, select, input, textarea").forEach(el=>{
+    el.addEventListener("click", triggerMusic);
+});
 </script>
 
 </body>
