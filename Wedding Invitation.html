@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Darryl & Christine | Garden Wedding RSVP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --garden-blue: #4a6f8a;
+    --olive: #7b9a6d;
+    --leaf-dark: #5f7f6a;
+    --petal-pink: #f7d9db;
+    --petal-peach: #ffe1d4;
+    --petal-yellow: #fff3b0;
+    --sunlight: #fff6df;
+    --ink: #243038;
+    --muted: #6b7c86;
+}
+
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* Body */
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,246,223,0.9), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(143,174,154,0.35), transparent 50%),
+        linear-gradient(135deg, #f7fbf8, #ffffff);
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Invitation Card */
+.invitation {
+    position: relative;
+    width: 460px;
+    max-width: 100%;
+    padding: 4.6rem 3.6rem;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98));
+    border-radius: 32px 32px 26px 26px;
+    text-align: center;
+    box-shadow: 0 30px 70px rgba(74, 111, 138, 0.18);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Garden arch frame */
+.invitation::before {
+    content: "";
+    position: absolute;
+    inset: 22px;
+    border-radius: 170px 170px 30px 30px;
+    border: 1px solid rgba(123,154,109,0.45);
+    z-index: 0;
+}
+
+/* Botanical + flower accents */
+.botanical { position: absolute; z-index:0; }
+.botanical svg { width: 100%; height: auto; }
+.botanical.top { top: -40px; right: -20px; width: 200px; }
+.botanical.bottom { bottom: -50px; left: -30px; width: 220px; }
+
+/* Text */
+.title { font-size: 0.85rem; letter-spacing: 2.6px; text-transform: uppercase; color: var(--olive); margin-bottom: 1.8rem; }
+.names { font-family: 'Playfair Display', serif; font-size: 2.6rem; color: var(--garden-blue); }
+.ampersand { display: block; font-size: 1.4rem; margin: 0.45rem 0; color: var(--leaf-dark); }
+.divider { margin: 2.6rem auto; width: 90px; height: 1px; background: linear-gradient(to right, transparent, rgba(123,154,109,0.8), transparent); }
+.date { font-size: 0.95rem; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); }
+.date strong { display:block; font-size:1.1rem; margin-top:0.45rem; color: var(--ink); }
+.venue { margin-top:2.5rem; font-size:0.95rem; line-height:1.8; color: var(--muted); }
+.venue strong { display:block; font-size:1.15rem; color: var(--garden-blue); margin-bottom:0.35rem; }
+.message { margin-top:1.8rem; font-size:0.95rem; line-height:1.5; font-style:italic; color:var(--muted); padding:0 0.5rem; text-align:center; z-index:1; position:relative; }
+
+/* RSVP Form */
+form.rsvp-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1;
+    position: relative;
+}
+
+form.rsvp-form input[type="text"],
+form.rsvp-form textarea,
+form.rsvp-form select {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--muted);
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    width: 100%;
+}
+
+form.rsvp-form textarea { resize: vertical; min-height: 80px; }
+
+form.rsvp-form button {
+    padding: 0.85rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--garden-blue);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form.rsvp-form button:hover { background: var(--leaf-dark); }
+
+/* Responsive */
+@media (max-width:480px){
+    .invitation { padding: 3rem 2rem; }
+    .names { font-size: 2rem; }
+    .title { font-size: 0.75rem; }
+    .divider { width: 70px; }
+    .message { font-size:0.9rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="invitation">
+
+    <!-- Top botanical + flowers -->
+    <div class="botanical top">
+        <svg viewBox="0 0 240 240" fill="none">
+            <path d="M50 190 C30 110, 100 30, 190 60" stroke="#7b9a6d" stroke-width="2.5"/>
+            <path d="M70 175 C60 125, 110 70, 160 85" stroke="#8fae9a" stroke-width="2"/>
+            <circle cx="150" cy="90" r="10" fill="#f7d9db"/>
+            <circle cx="165" cy="105" r="8" fill="#ffe1d4"/>
+            <circle cx="140" cy="70" r="9" fill="#fff3b0"/>
+            <circle cx="175" cy="80" r="7" fill="#f7d9db"/>
+        </svg>
+    </div>
+
+    <!-- Bottom botanical + flowers -->
+    <div class="botanical bottom">
+        <svg viewBox="0 0 240 240" fill="none">
+            <path d="M50 190 C30 110, 100 30, 190 60" stroke="#7b9a6d" stroke-width="2.5"/>
+            <path d="M70 175 C60 125, 110 70, 160 85" stroke="#8fae9a" stroke-width="2"/>
+            <circle cx="150" cy="90" r="10" fill="#f7d9db"/>
+            <circle cx="165" cy="105" r="8" fill="#ffe1d4"/>
+            <circle cx="140" cy="70" r="9" fill="#fff3b0"/>
+            <circle cx="175" cy="80" r="7" fill="#f7d9db"/>
+        </svg>
+    </div>
+
+    <div class="title">You are invited</div>
+
+    <div class="names">
+        Darryl
+        <span class="ampersand">&</span>
+        Christine
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="date">
+        <strong>July 5, 2028</strong>
+        4:00 pm, Wednesday
+    </div>
+
+    <div class="venue">
+        <strong>May's Garden</strong>
+        Araneta Ave, Brgy Pahanocoy<br>
+        Bacolod City
+    </div>
+
+    <div class="message">
+        Dear <strong>Nanay Juna</strong>, you’ve seen us grow and support us through every step, and we would be overjoyed to have you join our intimate garden wedding and share this special day with us.
+    </div>
+
+    <!-- RSVP Form -->
+    <form class="rsvp-form" action="mailto:darrylvanbasa@gmail.com" method="post" enctype="text/plain">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <select name="attending" required>
+            <option value="">Will you attend?</option>
+            <option value="yes">Yes, I will attend</option>
+            <option value="no">Sorry, I cannot attend</option>
+        </select>
+        <textarea name="message" placeholder="Optional message"></textarea>
+        <button type="submit">Send RSVP</button>
+    </form>
+
+</div>
+
+</body>
+</html>
