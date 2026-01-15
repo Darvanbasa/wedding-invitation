@@ -61,7 +61,12 @@ body {
     width: 50%;
     padding: 3.6rem 3.2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
+
+.page.page2 { justify-content: flex-start; } /* ensures page2 content sits toward top for balance */
 
 /* Typography */
 .title {
@@ -106,149 +111,61 @@ body {
     color: var(--muted);
 }
 
-.venue strong {
-    display:block;
-    font-size:1.05rem;
-    color: var(--garden-blue);
-}
+.venue strong { display:block; font-size:1.05rem; color: var(--garden-blue); }
 
-.message {
-    margin-top: 1.2rem;
-    font-style: italic;
-    color: var(--muted);
-    line-height: 1.6;
-}
+.message { margin-top: 1.2rem; font-style: italic; color: var(--muted); line-height:1.6; }
 
 /* RSVP */
-.rsvp-form {
-    margin-top: 1.6rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
+.rsvp-form { margin-top: 1.6rem; display:flex; flex-direction:column; gap:0.8rem; }
+.rsvp-form input, .rsvp-form textarea, .rsvp-form select { padding:0.65rem 0.9rem; border-radius:8px; border:1px solid var(--muted);}
+.rsvp-form button { padding:0.75rem; border-radius:8px; border:none; background: var(--garden-blue); color:#fff; cursor:pointer; }
 
-.rsvp-form input,
-.rsvp-form textarea,
-.rsvp-form select {
-    padding: 0.65rem 0.9rem;
-    border-radius: 8px;
-    border: 1px solid var(--muted);
-}
-
-.rsvp-form button {
-    padding: 0.75rem;
-    border-radius: 8px;
-    border: none;
-    background: var(--garden-blue);
-    color: #fff;
-    cursor: pointer;
-}
-
-/* Success message */
-.success-message {
+/* Popup success message */
+.popup {
     display: none;
-    opacity: 0;
-    margin-top: 1rem;
-    padding: 0.85rem;
-    border-radius: 12px;
-    background: rgba(123,154,109,0.08);
-    color: var(--leaf-dark);
-    font-size: 0.85rem;
+    position: fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.35);
+    justify-content:center;
+    align-items:center;
+    z-index: 999;
 }
-
-.success-message.show {
-    display: block;
-    animation: fadeIn 0.6s ease forwards;
+.popup-content {
+    background:white;
+    padding:1.2rem 1rem;
+    border-radius:12px;
+    text-align:center;
+    max-width:280px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    position: relative;
 }
-
-.success-message strong {
-    display: block;
-    margin-bottom: 0.25rem;
-}
-
-.success-message span {
-    display: block;
-    margin-bottom: 0.3rem;
-}
-
-.success-message em {
-    font-size: 0.75rem;
-    color: var(--muted);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+.popup-content strong{display:block;margin-bottom:0.5rem;}
+.popup-content span{display:block;margin-bottom:0.3rem;}
+.popup-content em{font-size:0.8rem;color:var(--muted);}
+#popupClose { position:absolute; top:6px; right:8px; background:none; border:none; font-size:1.2rem; cursor:pointer; }
 
 /* Arrows */
-.nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: rgba(74,111,138,0.9);
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 5;
-}
-
-.nav-arrow.left { left: -18px; }
-.nav-arrow.right { right: -18px; }
-.hidden { display: none; }
+.nav-arrow { position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; border:none; background: rgba(74,111,138,0.9); color:white; font-size:1.2rem; cursor:pointer; z-index:5; }
+.nav-arrow.left { left:-18px; }
+.nav-arrow.right { right:-18px; }
+.hidden { display:none; }
 
 /* Palette */
-.palette {
-    margin-top: 1.8rem;
-}
-
-.palette-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-top: 0.9rem;
-}
-
-.swatch {
-    height: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
-
-.label {
-    font-size: 0.65rem;
-    margin-top: 0.3rem;
-    color: var(--muted);
-}
+.palette { margin-top:1.8rem; }
+.palette-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:0.9rem; }
+.swatch { height:40px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08);}
+.label { font-size:0.65rem; margin-top:0.3rem; color:var(--muted);}
 
 /* Music button */
-.music-toggle {
-    margin: 1.2rem auto 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: white;
-    border: 1px solid rgba(123,154,109,0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.music-toggle svg {
-    width: 16px;
-    fill: var(--garden-blue);
-}
-
-.music-toggle.paused svg { opacity: 0.5; }
+.music-toggle { margin:1.2rem auto 0; width:40px; height:40px; border-radius:50%; background:white; border:1px solid rgba(123,154,109,0.4); display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.music-toggle svg { width:16px; fill: var(--garden-blue); }
+.music-toggle.paused svg { opacity:0.5; }
 
 @media (max-width:480px){
-    .page { padding: 3rem 2rem; }
-    .names { font-size: 2rem; }
+    .page { padding:3rem 2rem; }
+    .names { font-size:2rem; }
     .palette-grid { grid-template-columns: repeat(3, 1fr); }
 }
 </style>
@@ -270,24 +187,17 @@ body {
 <!-- PAGE 1 -->
 <div class="page">
 <div class="title">You are invited</div>
-
 <div class="names">
-Darryl
-<span class="ampersand">&</span>
-Christine
+Darryl <span class="ampersand">&</span> Christine
 </div>
-
 <div class="divider"></div>
-
 <div class="venue">
 <strong>July 5, 2028</strong>
 4:00 PM · May's Garden
 </div>
-
 <div class="message">
 We are so grateful for you and the place you hold in our lives, and we would be honored to have you join us as we say ‘I do’
 </div>
-
 <form class="rsvp-form" id="rsvpForm">
 <input name="name" placeholder="Your Name" required>
 <select name="attending" required>
@@ -297,35 +207,25 @@ We are so grateful for you and the place you hold in our lives, and we would be 
 </select>
 <textarea name="message" placeholder="Message"></textarea>
 <button type="submit">Send</button>
-
-<div id="formStatus" class="success-message">
-<strong>Thank you for your response 🌿</strong>
-<span>We’re so happy to celebrate with you.</span>
-<em>— Darryl & Christine</em>
-</div>
 </form>
 </div>
 
 <!-- PAGE 2 -->
-<div class="page">
+<div class="page page2">
 <div class="title">Wedding Program</div>
 <div class="divider"></div>
-
 <div class="venue">
 <strong>Ceremony</strong>
 4:00 PM – Processional<br>
 4:30 PM – Vows<br>
 5:00 PM – Pronouncement
 </div>
-
 <div class="venue">
 <strong>Reception</strong>
 6:00 PM – Dinner<br>
 7:30 PM – First Dance
 </div>
-
 <div class="divider"></div>
-
 <div class="palette">
 <div class="title">Attire Color Guide</div>
 <div class="palette-grid">
@@ -336,26 +236,30 @@ We are so grateful for you and the place you hold in our lives, and we would be 
 <div><div class="swatch" style="background:#C9BBD5"></div><div class="label">Lavender</div></div>
 </div>
 </div>
-
 <div class="message">
 Soft garden tones are encouraged, but please wear what makes you feel comfortable 🌿
 </div>
-
-
-<div class="divider"></div>
-
-<div class="message">
+<div class="venuee">
 Your presence will make our day even more special.
 </div>
-
 <div class="music-toggle paused" id="musicToggle">
 <svg viewBox="0 0 24 24">
 <path d="M12 3v10.55a4 4 0 1 0 2 3.45V7h4V3h-6z"/>
 </svg>
 </div>
+</div>
 
 </div>
 </div>
+
+<!-- POPUP SUCCESS MESSAGE -->
+<div id="successPopup" class="popup">
+  <div class="popup-content">
+    <button id="popupClose">&times;</button>
+    <strong>Thank you for your response 🌿</strong>
+    <span>We’re so happy to celebrate with you.</span>
+    <em>— Darryl & Christine</em>
+  </div>
 </div>
 
 <script>
@@ -365,6 +269,8 @@ const prev = document.getElementById("prevBtn");
 const next = document.getElementById("nextBtn");
 const music = document.getElementById("bgMusic");
 const toggle = document.getElementById("musicToggle");
+const popup = document.getElementById("successPopup");
+const popupClose = document.getElementById("popupClose");
 
 function playMusic() {
     if (music.paused) {
@@ -373,16 +279,16 @@ function playMusic() {
 }
 
 next.onclick = () => {
-    page = 1;
-    pages.style.transform = "translateX(-50%)";
+    page=1;
+    pages.style.transform="translateX(-50%)";
     prev.classList.remove("hidden");
     next.classList.add("hidden");
     playMusic();
 };
 
 prev.onclick = () => {
-    page = 0;
-    pages.style.transform = "translateX(0)";
+    page=0;
+    pages.style.transform="translateX(0)";
     prev.classList.add("hidden");
     next.classList.remove("hidden");
     playMusic();
@@ -402,25 +308,27 @@ toggle.onclick = () => {
     }
 };
 
-document.getElementById("rsvpForm").addEventListener("submit", async e => {
+// Form submission with popup
+document.getElementById("rsvpForm").addEventListener("submit", async e=>{
     e.preventDefault();
     const form = e.target;
-    const status = document.getElementById("formStatus");
 
     const res = await fetch("https://formspree.io/f/mqeeabjg", {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" }
+        method:"POST",
+        body:new FormData(form),
+        headers:{Accept:"application/json"}
     });
 
-    if (res.ok) {
+    if(res.ok){
         form.reset();
-        status.classList.add("show");
-        form.querySelector("button").disabled = true;
-    } else {
+        popup.style.display="flex";
+        setTimeout(()=>{ popup.style.display="none"; }, 3500);
+    } else{
         alert("Submission failed. Please try again.");
     }
 });
+
+popupClose.onclick = () => { popup.style.display="none"; }
 </script>
 
 </body>
