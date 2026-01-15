@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- added for mobile responsiveness -->
 <title>Darryl & Christine | Garden Wedding RSVP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -16,8 +16,10 @@
     --muted: #6b7c86;
 }
 
+/* Reset */
 * { margin:0; padding:0; box-sizing:border-box; }
 
+/* Body */
 body {
     min-height: 100vh;
     background:
@@ -31,6 +33,7 @@ body {
     padding: 16px;
 }
 
+/* Invitation card */
 .invitation {
     position: relative;
     width: 460px;
@@ -50,125 +53,120 @@ body {
     z-index: 0;
 }
 
+/* Pages container */
 .pages {
     display: flex;
-    width: 200%;
     transition: transform 0.6s ease;
     position: relative;
     z-index: 1;
 }
 
+/* Individual page */
 .page {
-    width: 50%;
-    padding: 3.6rem 3.2rem;
+    flex: 0 0 100%;
+    padding: 4rem 2rem;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    min-height: 500px;
 }
-
-.page.page2 { justify-content: flex-start; }
 
 /* Typography */
-.title {
-    font-size: 0.8rem;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
-    color: var(--olive);
-    margin-bottom: 1.2rem;
-}
-
-.names {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem;
-    color: var(--garden-blue);
-}
-
-.ampersand {
-    display: block;
-    font-size: 1.3rem;
-    margin: 0.3rem 0;
-    color: var(--leaf-dark);
-}
-
-.divider {
-    margin: 1.8rem auto;
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(to right, transparent, rgba(123,154,109,0.8), transparent);
-}
-
-.venue {
-    margin-top: 1.4rem;
-    font-size: 0.9rem;
-    line-height: 1.7;
-    color: var(--muted);
-}
-
-.venuee {
-    margin-top: 1.2rem;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: var(--muted);
-}
-
+.title { font-size: 0.85rem; letter-spacing: 2.4px; text-transform: uppercase; color: var(--olive); margin-bottom: 1rem; }
+.names { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--garden-blue); }
+.ampersand { display:block; font-size:1.2rem; margin:0.3rem 0; color: var(--leaf-dark); }
+.divider { margin: 1.5rem auto; width: 80px; height: 1px; background: linear-gradient(to right, transparent, rgba(123,154,109,0.8), transparent); }
+.venue, .venuee { margin-top:1rem; font-size:0.9rem; line-height:1.5; color: var(--muted); }
 .venue strong { display:block; font-size:1.05rem; color: var(--garden-blue); }
-
-.message { margin-top: 1.2rem; font-style: italic; color: var(--muted); line-height:1.6; }
+.message { margin-top:1rem; font-style:italic; color:var(--muted); line-height:1.5; }
 
 /* RSVP */
-.rsvp-form { margin-top: 1.6rem; display:flex; flex-direction:column; gap:0.8rem; }
-.rsvp-form input, .rsvp-form textarea, .rsvp-form select { padding:0.65rem 0.9rem; border-radius:8px; border:1px solid var(--muted);}
-.rsvp-form button { padding:0.75rem; border-radius:8px; border:none; background: var(--garden-blue); color:#fff; cursor:pointer; }
+.rsvp-form { margin-top: 1.2rem; display:flex; flex-direction: column; gap:0.8rem; }
+.rsvp-form input, .rsvp-form textarea, .rsvp-form select { padding:0.65rem 0.9rem; border-radius:8px; border:1px solid var(--muted); width:100%; }
+.rsvp-form button { padding:0.75rem; border-radius:8px; border:none; background:var(--garden-blue); color:#fff; cursor:pointer; }
 
-/* Popup success message */
-.popup {
-    display: none;
+/* Success popup */
+.success-message {
+    display:none;
     position: fixed;
-    top:0; left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0.35);
-    justify-content:center;
-    align-items:center;
-    z-index: 999;
-}
-.popup-content {
-    background:white;
-    padding:1.2rem 1rem;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    background: rgba(123,154,109,0.1);
+    padding:1rem 1.5rem;
     border-radius:12px;
+    font-size:0.9rem;
+    color: var(--leaf-dark);
     text-align:center;
-    max-width:280px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
-    position: relative;
+    z-index: 20;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-.popup-content strong{display:block;margin-bottom:0.5rem;}
-.popup-content span{display:block;margin-bottom:0.3rem;}
-.popup-content em{font-size:0.8rem;color:var(--muted);}
-#popupClose { position:absolute; top:6px; right:8px; background:none; border:none; font-size:1.2rem; cursor:pointer; }
+.success-message.show {
+    display:block;
+    animation: fadeIn 0.6s ease forwards;
+}
+@keyframes fadeIn {
+    from { opacity:0; transform: translate(-50%, 10px); }
+    to { opacity:1; transform: translate(-50%,0); }
+}
 
 /* Arrows */
-.nav-arrow { position:absolute; top:50%; transform:translateY(-50%); width:40px; height:40px; border-radius:50%; border:none; background: rgba(74,111,138,0.9); color:white; font-size:1.2rem; cursor:pointer; z-index:5; }
+.nav-arrow {
+    position:absolute;
+    top:50%;
+    transform: translateY(-50%);
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:none;
+    background: rgba(74,111,138,0.9);
+    color:white;
+    font-size:1.2rem;
+    cursor:pointer;
+    z-index:5;
+}
 .nav-arrow.left { left:-18px; }
 .nav-arrow.right { right:-18px; }
 .hidden { display:none; }
 
 /* Palette */
-.palette { margin-top:1.8rem; }
-.palette-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:0.9rem; }
-.swatch { height:40px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08);}
-.label { font-size:0.65rem; margin-top:0.3rem; color:var(--muted);}
+.palette { margin-top:1.5rem; }
+.palette-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:0.8rem; }
+.swatch { height:40px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
+.label { font-size:0.65rem; margin-top:0.3rem; color:var(--muted); }
 
-/* Music button */
-.music-toggle { margin:1.2rem auto 0; width:40px; height:40px; border-radius:50%; background:white; border:1px solid rgba(123,154,109,0.4); display:flex; align-items:center; justify-content:center; cursor:pointer; }
-.music-toggle svg { width:16px; fill: var(--garden-blue); }
+/* Music toggle */
+.music-toggle { margin:1rem auto 0; width:40px; height:40px; border-radius:50%; background:white; border:1px solid rgba(123,154,109,0.4); display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.music-toggle svg { width:16px; fill:var(--garden-blue); }
 .music-toggle.paused svg { opacity:0.5; }
 
+/* Mobile adjustments */
 @media (max-width:480px){
-    .page { padding:2rem 1.5rem; }
-    .names { font-size:1.9rem; }
-    .palette-grid { grid-template-columns: repeat(3, 1fr); }
+    .invitation { width: 90vw; }
+    .page { padding:3.2rem 1.5rem; min-height:400px; }
+    .names { font-size:1.8rem; }
+    .venue, .venuee, .message { font-size:0.82rem; line-height:1.4; }
+    .divider { width:60px; margin:1rem auto; }
+
+    /* Palette adjustments */
+    .palette-grid { 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    /* Make all swatch containers the same size */
+    .palette-grid > div { 
+        flex: 0 0 60px; /* fixed width for each color container */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* center swatch + label */
+    }
+    
+    .swatch { width: 100%; } /* swatch fills its container consistently */
+    
+    .music-toggle { margin-top:0.8rem; }
 }
+
 </style>
 </head>
 
@@ -186,12 +184,13 @@ body {
 <div class="pages" id="pages">
 
 <!-- PAGE 1 -->
-<div class="page">
+<div class="page page1">
 <div class="title">You are invited</div>
-<div class="names">Darryl <span class="ampersand">&</span> Christine</div>
+<div class="names">Darryl<span class="ampersand">&</span>Christine</div>
 <div class="divider"></div>
-<div class="venue"><strong>July 5, 2028</strong> 4:00 PM · May's Garden</div>
+<div class="venue"><strong>July 5, 2028</strong><br>4:00 PM · May's Garden</div>
 <div class="message">We are so grateful for you and the place you hold in our lives, and we would be honored to have you join us as we say ‘I do’</div>
+
 <form class="rsvp-form" id="rsvpForm">
 <input name="name" placeholder="Your Name" required>
 <select name="attending" required>
@@ -208,9 +207,10 @@ body {
 <div class="page page2">
 <div class="title">Wedding Program</div>
 <div class="divider"></div>
-<div class="venue"><strong>Ceremony</strong> 4:00 PM – Processional<br>4:30 PM – Vows<br>5:00 PM – Pronouncement</div>
-<div class="venue"><strong>Reception</strong> 6:00 PM – Dinner<br>7:30 PM – First Dance</div>
+<div class="venue"><strong>Ceremony</strong><br>4:00 PM – Processional<br>4:30 PM – Vows<br>5:00 PM – Pronouncement</div>
+<div class="venue"><strong>Reception</strong><br>6:00 PM – Dinner<br>7:30 PM – First Dance</div>
 <div class="divider"></div>
+
 <div class="palette">
 <div class="title">Attire Color Guide</div>
 <div class="palette-grid">
@@ -221,8 +221,10 @@ body {
 <div><div class="swatch" style="background:#C9BBD5"></div><div class="label">Lavender</div></div>
 </div>
 </div>
+
 <div class="message">Soft garden tones are encouraged, but please wear what makes you feel comfortable 🌿</div>
 <div class="venuee">Your presence will make our day even more special.</div>
+
 <div class="music-toggle paused" id="musicToggle">
 <svg viewBox="0 0 24 24"><path d="M12 3v10.55a4 4 0 1 0 2 3.45V7h4V3h-6z"/></svg>
 </div>
@@ -231,72 +233,38 @@ body {
 </div>
 </div>
 
-<!-- POPUP SUCCESS MESSAGE -->
-<div id="successPopup" class="popup">
-  <div class="popup-content">
-    <button id="popupClose">&times;</button>
-    <strong>Thank you for your response 🌿</strong>
-    <span>We’re so happy to celebrate with you.</span>
-    <em>— Darryl & Christine</em>
-  </div>
+<div id="formStatus" class="success-message">
+<strong>Thank you for your response 🌿</strong>
+<span>We’re so happy to celebrate with you.</span>
+<em>— Darryl & Christine</em>
 </div>
 
 <script>
-let page = 0;
-const pages = document.getElementById("pages");
-const prev = document.getElementById("prevBtn");
-const next = document.getElementById("nextBtn");
-const music = document.getElementById("bgMusic");
-const toggle = document.getElementById("musicToggle");
-const popup = document.getElementById("successPopup");
-const popupClose = document.getElementById("popupClose");
+let page=0;
+const pages=document.getElementById("pages");
+const prev=document.getElementById("prevBtn");
+const next=document.getElementById("nextBtn");
+const music=document.getElementById("bgMusic");
+const toggle=document.getElementById("musicToggle");
+const form=document.getElementById("rsvpForm");
+const status=document.getElementById("formStatus");
 
-function playMusic(){
-    if(music.paused){ music.play().then(()=>toggle.classList.remove("paused")).catch(()=>{}); }
-}
+// Page navigation
+next.onclick=()=>{ page=1; pages.style.transform="translateX(-100%)"; prev.classList.remove("hidden"); next.classList.add("hidden"); playMusic(); };
+prev.onclick=()=>{ page=0; pages.style.transform="translateX(0)"; prev.classList.add("hidden"); next.classList.remove("hidden"); playMusic(); };
 
-next.onclick = () => {
-    page=1;
-    pages.style.transform="translateX(-50%)";
-    prev.classList.remove("hidden");
-    next.classList.add("hidden");
-    playMusic();
-};
-prev.onclick = () => {
-    page=0;
-    pages.style.transform="translateX(0)";
-    prev.classList.add("hidden");
-    next.classList.remove("hidden");
-    playMusic();
-};
+// Music play on any click
+document.querySelectorAll("button,input,select,textarea").forEach(el=>{ el.addEventListener("click", playMusic); });
+toggle.onclick=()=>{ music.paused?music.play().then(()=>toggle.classList.remove("paused")).catch(()=>{}): (music.pause(), toggle.classList.add("paused")); };
+function playMusic(){ if(music.paused) music.play().then(()=>toggle.classList.remove("paused")).catch(()=>{}); }
 
-document.querySelectorAll("button, input, select, textarea").forEach(el=>{
-    el.addEventListener("click", playMusic);
-});
-
-toggle.onclick = () => {
-    if(music.paused){ music.play(); toggle.classList.remove("paused"); }
-    else{ music.pause(); toggle.classList.add("paused"); }
-};
-
-// Form submit popup
-document.getElementById("rsvpForm").addEventListener("submit", async e=>{
+// RSVP form submission
+form.addEventListener("submit", async e=>{
     e.preventDefault();
-    const form=e.target;
-    const res = await fetch("https://formspree.io/f/mqeeabjg", {
-        method:"POST",
-        body:new FormData(form),
-        headers:{Accept:"application/json"}
-    });
-    if(res.ok){
-        form.reset();
-        popup.style.display="flex";
-        setTimeout(()=>{ popup.style.display="none"; },3500);
-    } else{
-        alert("Submission failed. Please try again.");
-    }
+    const res=await fetch("https://formspree.io/f/mqeeabjg", { method:"POST", body:new FormData(form), headers:{Accept:"application/json"} });
+    if(res.ok){ form.reset(); status.classList.add("show"); setTimeout(()=>{ status.classList.remove("show"); form.querySelector("button").disabled=false; }, 4000); }
+    else alert("Submission failed. Please try again.");
 });
-popupClose.onclick = ()=>{ popup.style.display="none"; }
 </script>
 
 </body>
