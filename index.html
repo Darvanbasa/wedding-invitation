@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- added for mobile responsiveness -->
 <title>Darryl & Christine | Garden Wedding RSVP</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -66,7 +67,7 @@ body {
     justify-content: flex-start;
 }
 
-.page.page2 { justify-content: flex-start; } /* ensures page2 content sits toward top for balance */
+.page.page2 { justify-content: flex-start; }
 
 /* Typography */
 .title {
@@ -164,8 +165,8 @@ body {
 .music-toggle.paused svg { opacity:0.5; }
 
 @media (max-width:480px){
-    .page { padding:3rem 2rem; }
-    .names { font-size:2rem; }
+    .page { padding:2rem 1.5rem; }
+    .names { font-size:1.9rem; }
     .palette-grid { grid-template-columns: repeat(3, 1fr); }
 }
 </style>
@@ -187,17 +188,10 @@ body {
 <!-- PAGE 1 -->
 <div class="page">
 <div class="title">You are invited</div>
-<div class="names">
-Darryl <span class="ampersand">&</span> Christine
-</div>
+<div class="names">Darryl <span class="ampersand">&</span> Christine</div>
 <div class="divider"></div>
-<div class="venue">
-<strong>July 5, 2028</strong>
-4:00 PM · May's Garden
-</div>
-<div class="message">
-We are so grateful for you and the place you hold in our lives, and we would be honored to have you join us as we say ‘I do’
-</div>
+<div class="venue"><strong>July 5, 2028</strong> 4:00 PM · May's Garden</div>
+<div class="message">We are so grateful for you and the place you hold in our lives, and we would be honored to have you join us as we say ‘I do’</div>
 <form class="rsvp-form" id="rsvpForm">
 <input name="name" placeholder="Your Name" required>
 <select name="attending" required>
@@ -214,17 +208,8 @@ We are so grateful for you and the place you hold in our lives, and we would be 
 <div class="page page2">
 <div class="title">Wedding Program</div>
 <div class="divider"></div>
-<div class="venue">
-<strong>Ceremony</strong>
-4:00 PM – Processional<br>
-4:30 PM – Vows<br>
-5:00 PM – Pronouncement
-</div>
-<div class="venue">
-<strong>Reception</strong>
-6:00 PM – Dinner<br>
-7:30 PM – First Dance
-</div>
+<div class="venue"><strong>Ceremony</strong> 4:00 PM – Processional<br>4:30 PM – Vows<br>5:00 PM – Pronouncement</div>
+<div class="venue"><strong>Reception</strong> 6:00 PM – Dinner<br>7:30 PM – First Dance</div>
 <div class="divider"></div>
 <div class="palette">
 <div class="title">Attire Color Guide</div>
@@ -236,16 +221,10 @@ We are so grateful for you and the place you hold in our lives, and we would be 
 <div><div class="swatch" style="background:#C9BBD5"></div><div class="label">Lavender</div></div>
 </div>
 </div>
-<div class="message">
-Soft garden tones are encouraged, but please wear what makes you feel comfortable 🌿
-</div>
-<div class="venuee">
-Your presence will make our day even more special.
-</div>
+<div class="message">Soft garden tones are encouraged, but please wear what makes you feel comfortable 🌿</div>
+<div class="venuee">Your presence will make our day even more special.</div>
 <div class="music-toggle paused" id="musicToggle">
-<svg viewBox="0 0 24 24">
-<path d="M12 3v10.55a4 4 0 1 0 2 3.45V7h4V3h-6z"/>
-</svg>
+<svg viewBox="0 0 24 24"><path d="M12 3v10.55a4 4 0 1 0 2 3.45V7h4V3h-6z"/></svg>
 </div>
 </div>
 
@@ -272,10 +251,8 @@ const toggle = document.getElementById("musicToggle");
 const popup = document.getElementById("successPopup");
 const popupClose = document.getElementById("popupClose");
 
-function playMusic() {
-    if (music.paused) {
-        music.play().then(()=>toggle.classList.remove("paused")).catch(()=>{});
-    }
+function playMusic(){
+    if(music.paused){ music.play().then(()=>toggle.classList.remove("paused")).catch(()=>{}); }
 }
 
 next.onclick = () => {
@@ -285,7 +262,6 @@ next.onclick = () => {
     next.classList.add("hidden");
     playMusic();
 };
-
 prev.onclick = () => {
     page=0;
     pages.style.transform="translateX(0)";
@@ -299,36 +275,28 @@ document.querySelectorAll("button, input, select, textarea").forEach(el=>{
 });
 
 toggle.onclick = () => {
-    if (music.paused) {
-        music.play();
-        toggle.classList.remove("paused");
-    } else {
-        music.pause();
-        toggle.classList.add("paused");
-    }
+    if(music.paused){ music.play(); toggle.classList.remove("paused"); }
+    else{ music.pause(); toggle.classList.add("paused"); }
 };
 
-// Form submission with popup
+// Form submit popup
 document.getElementById("rsvpForm").addEventListener("submit", async e=>{
     e.preventDefault();
-    const form = e.target;
-
+    const form=e.target;
     const res = await fetch("https://formspree.io/f/mqeeabjg", {
         method:"POST",
         body:new FormData(form),
         headers:{Accept:"application/json"}
     });
-
     if(res.ok){
         form.reset();
         popup.style.display="flex";
-        setTimeout(()=>{ popup.style.display="none"; }, 3500);
+        setTimeout(()=>{ popup.style.display="none"; },3500);
     } else{
         alert("Submission failed. Please try again.");
     }
 });
-
-popupClose.onclick = () => { popup.style.display="none"; }
+popupClose.onclick = ()=>{ popup.style.display="none"; }
 </script>
 
 </body>
