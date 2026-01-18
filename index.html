@@ -12,7 +12,6 @@
     --garden-blue: #4a6f8a;
     --olive: #7b9a6d;
     --leaf-dark: #5f7f6a;
-    --ink: #243038;
     --muted: #6b7c86;
 }
 
@@ -22,10 +21,9 @@
 /* Body */
 body {
     min-height: 100vh;
-    background:
-        radial-gradient(circle at 15% 20%, rgba(255,246,223,0.9), transparent 45%),
-        radial-gradient(circle at 85% 80%, rgba(143,174,154,0.35), transparent 50%),
-        linear-gradient(135deg, #f7fbf8, #ffffff);
+    background: radial-gradient(circle at 15% 20%, rgba(255,246,223,0.9), transparent 30%), 
+                radial-gradient(circle at 85% 80%, rgba(143,174,154,0.35), transparent 30%), 
+                linear-gradient(135deg, #f7fbf8, #ffffff);
     font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
@@ -38,19 +36,31 @@ body {
     position: relative;
     width: 460px;
     max-width: 100%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.98));
     border-radius: 32px;
-    box-shadow: 0 30px 70px rgba(74,111,138,0.18);
     overflow: hidden;
+    box-shadow: 0 30px 70px rgba(74,111,138,0.18);
 }
 
+/* Background image layer */
+.invitation .bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.28;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Arc border */
 .invitation::before {
     content: "";
     position: absolute;
-    inset: 20px;
-    border-radius: 160px 160px 28px 28px;
-    border: 1px solid rgba(123,154,109,0.45);
-    z-index: 0;
+    inset: 24px;
+    border-radius: 220px 220px 36px 36px;
+    border: 2.5px solid rgba(123,154,109,0.55);
+    z-index: 2;
 }
 
 /* Pages container */
@@ -58,7 +68,7 @@ body {
     display: flex;
     transition: transform 0.6s ease;
     position: relative;
-    z-index: 1;
+    z-index: 3;
 }
 
 /* Individual page */
@@ -90,16 +100,15 @@ body {
     left: 50%;
     top: 20%;
     transform: translateX(-50%);
-    background: #7B9A6D; /* 100% opacity */
+    background: #7B9A6D;
     padding: 1rem 1.5rem;
     border-radius: 12px;
     font-size: 0.9rem;
-    color: #ffffff; /* white text */
+    color: #ffffff;
     text-align: center;
     z-index: 20;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
-
 .success-message.show {
     display:block;
     animation: fadeIn 0.6s ease forwards;
@@ -147,27 +156,21 @@ body {
     .venue, .venuee, .message { font-size:0.82rem; line-height:1.4; }
     .divider { width:60px; margin:1rem auto; }
 
-    /* Palette adjustments */
     .palette-grid { 
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 8px;
     }
-
-    /* Make all swatch containers the same size */
     .palette-grid > div { 
-        flex: 0 0 60px; /* fixed width for each color container */
+        flex: 0 0 60px;
         display: flex;
         flex-direction: column;
-        align-items: center; /* center swatch + label */
+        align-items: center;
     }
-    
-    .swatch { width: 100%; } /* swatch fills its container consistently */
-    
+    .swatch { width: 100%; }
     .music-toggle { margin-top:0.8rem; }
 }
-
 </style>
 </head>
 
@@ -179,65 +182,69 @@ body {
 
 <div class="invitation">
 
-<button class="nav-arrow left hidden" id="prevBtn">❮</button>
-<button class="nav-arrow right" id="nextBtn">❯</button>
+  <!-- Background Image -->
+  <img src="bg-wedding.jpg" class="bg-image">
 
-<div class="pages" id="pages">
+  <!-- Navigation Arrows -->
+  <button class="nav-arrow left hidden" id="prevBtn">❮</button>
+  <button class="nav-arrow right" id="nextBtn">❯</button>
 
-<!-- PAGE 1 -->
-<div class="page page1">
-<div class="title">You are invited</div>
-<div class="names">Darryl<span class="ampersand">&</span>Christine</div>
-<div class="divider"></div>
-<div class="venue"><strong>July 5, 2028</strong><br>4:00 PM · May's Garden</div>
-<div class="message">We are so grateful for you and the place you hold in our lives, and we would be honored to have you join us as we say ‘I do’</div>
+  <div class="pages" id="pages">
 
-<form class="rsvp-form" id="rsvpForm">
-<input name="name" placeholder="Your Name" required>
-<select name="attending" required>
-<option value="">Will you attend?</option>
-<option value="Yes">Yes</option>
-<option value="No">No</option>
-</select>
-<textarea name="message" placeholder="Message"></textarea>
-<button type="submit">Send</button>
-</form>
-</div>
+    <!-- PAGE 1 -->
+    <div class="page page1">
+      <div class="title">You are invited</div>
+      <div class="names">Darryl<span class="ampersand">&</span>Christine</div>
+      <div class="divider"></div>
+      <div class="venue"><strong>July 5, 2028</strong><br>4:00 PM · May's Garden</div>
+      <div class="message">We are so grateful for you and the place you hold in our lives, and we would be honored to have you join us as we say ‘I do’</div>
 
-<!-- PAGE 2 -->
-<div class="page page2">
-<div class="title">Wedding Program</div>
-<div class="divider"></div>
-<div class="venue"><strong>Ceremony</strong><br>4:00 PM – Processional<br>4:30 PM – Vows<br>5:00 PM – Pronouncement</div>
-<div class="venue"><strong>Reception</strong><br>6:00 PM – Dinner<br>7:30 PM – First Dance</div>
-<div class="divider"></div>
+      <form class="rsvp-form" id="rsvpForm">
+        <input name="name" placeholder="Your Name" required>
+        <select name="attending" required>
+          <option value="">Will you attend?</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select>
+        <textarea name="message" placeholder="Message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
 
-<div class="palette">
-<div class="title">Attire Color Guide</div>
-<div class="palette-grid">
-<div><div class="swatch" style="background:#EFBCB9"></div><div class="label">Blush</div></div>
-<div><div class="swatch" style="background:#93A0C0"></div><div class="label">Dusty Blue</div></div>
-<div><div class="swatch" style="background:#CCD6BB"></div><div class="label">Sage</div></div>
-<div><div class="swatch" style="background:#F5E3CE"></div><div class="label">Champagne</div></div>
-<div><div class="swatch" style="background:#C9BBD5"></div><div class="label">Lavender</div></div>
-</div>
-</div>
+    <!-- PAGE 2 -->
+    <div class="page page2">
+      <div class="title">Wedding Program</div>
+      <div class="divider"></div>
+      <div class="venue"><strong>Ceremony</strong><br>4:00 PM – Processional<br>4:30 PM – Vows<br>5:00 PM – Pronouncement</div>
+      <div class="venue"><strong>Reception</strong><br>6:00 PM – Dinner<br>7:30 PM – First Dance</div>
+      <div class="divider"></div>
 
-<div class="message">Soft garden tones are encouraged, but please wear what makes you feel comfortable 🌿</div>
-<div class="venuee">Your presence will make our day even more special.</div>
+      <div class="palette">
+        <div class="title">Attire Color Guide</div>
+        <div class="palette-grid">
+          <div><div class="swatch" style="background:#EFBCB9"></div><div class="label">Blush</div></div>
+          <div><div class="swatch" style="background:#93A0C0"></div><div class="label">Dusty Blue</div></div>
+          <div><div class="swatch" style="background:#CCD6BB"></div><div class="label">Sage</div></div>
+          <div><div class="swatch" style="background:#F5E3CE"></div><div class="label">Champagne</div></div>
+          <div><div class="swatch" style="background:#C9BBD5"></div><div class="label">Lavender</div></div>
+        </div>
+      </div>
 
-<div class="music-toggle paused" id="musicToggle">
-<svg viewBox="0 0 24 24"><path d="M12 3v10.55a4 4 0 1 0 2 3.45V7h4V3h-6z"/></svg>
-</div>
-</div>
+      <div class="message">Soft garden tones are encouraged, but please wear what makes you feel comfortable 🌿</div>
+      <div class="venuee">Your presence will make our day even more special.</div>
 
-</div>
+      <div class="music-toggle paused" id="musicToggle">
+        <svg viewBox="0 0 24 24"><path d="M12 3v10.55a4 4 0 1 0 2 3.45V7h4V3h-6z"/></svg>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <div id="formStatus" class="success-message">
-<strong>Thank you for your response 🌿</strong>
-<span>We’re so happy to celebrate with you.</span>
-<em>— Darryl & Christine</em>
+  <strong>Thank you for your response 🌿</strong>
+  <span>We’re so happy to celebrate with you.</span>
+  <em>— Darryl & Christine</em>
 </div>
 
 <script>
