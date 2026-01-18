@@ -85,20 +85,21 @@ body {
 
 /* Success popup */
 .success-message {
-    display:none;
+    display: none;
     position: fixed;
     left: 50%;
     top: 20%;
     transform: translateX(-50%);
-    background: rgba(123,154,109,0.1);
-    padding:1rem 1.5rem;
-    border-radius:12px;
-    font-size:0.9rem;
-    color: var(--leaf-dark);
-    text-align:center;
+    background: #7B9A6D; /* 100% opacity */
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: #ffffff; /* white text */
+    text-align: center;
     z-index: 20;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
 .success-message.show {
     display:block;
     animation: fadeIn 0.6s ease forwards;
@@ -188,7 +189,7 @@ body {
 <div class="title">You are invited</div>
 <div class="names">Darryl<span class="ampersand">&</span>Christine</div>
 <div class="divider"></div>
-<div class="venue"><strong>July 5, 2088</strong><br>4:00 PM · May's Garden</div>
+<div class="venue"><strong>July 5, 2028</strong><br>4:00 PM · May's Garden</div>
 <div class="message">We are so grateful for you and the place you hold in our lives, and we would be honored to have you join us as we say ‘I do’</div>
 
 <form class="rsvp-form" id="rsvpForm">
@@ -269,4 +270,3 @@ form.addEventListener("submit", async e=>{
 
 </body>
 </html>
-
