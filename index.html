@@ -262,18 +262,25 @@ const status=document.getElementById("formStatus");
 music.volume = 0;
 
 // Fade-in function
-function fadeInAudio(duration = 5000) {
-    let step = 0.01;
-    let intervalTime = duration / (1 / step);
-    const fade = setInterval(() => {
-        if (music.volume < 1) {
-            music.volume = Math.min(music.volume + step, 1);
-        } else {
-            clearInterval(fade);
+function fadeInAudio(duration = 3000) {
+    music.volume = 0; // start silent
+    music.play().then(() => {
+        let start = null;
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            let progress = timestamp - start;
+            music.volume = Math.min(progress / duration, 1);
+            if (progress < duration) {
+                requestAnimationFrame(step);
+            }
         }
-    }, intervalTime);
-    music.play().catch(()=>{}); // play when allowed
+        requestAnimationFrame(step);
+    }).catch(() => {
+        // play failed (user interaction needed)
+        console.log("Audio play blocked");
+    });
 }
+
 
 // Trigger fade-in on first user interaction (required for mobile)
 let fadeInStarted = false;
@@ -314,3 +321,4 @@ form.addEventListener("submit", async e=>{
 
 </body>
 </html>
+
