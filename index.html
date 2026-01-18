@@ -197,7 +197,7 @@ body {
       <div class="title">You are invited</div>
       <div class="names">Darryl<span class="ampersand">&</span>Christine</div>
       <div class="divider"></div>
-      <div class="venue"><strong>July 5, 2088</strong><br>4:00 PM · May's Garden</div>
+      <div class="venue"><strong>July 5, 2028</strong><br>4:00 PM · May's Garden</div>
       <div class="message">We are so grateful for you and the place you hold in our lives, and we would be honored to have you join us as we say ‘I do’</div>
 
       <form class="rsvp-form" id="rsvpForm">
@@ -262,22 +262,59 @@ const status=document.getElementById("formStatus");
 next.onclick=()=>{ page=1; pages.style.transform="translateX(-100%)"; prev.classList.remove("hidden"); next.classList.add("hidden"); playMusic(); };
 prev.onclick=()=>{ page=0; pages.style.transform="translateX(0)"; prev.classList.add("hidden"); next.classList.remove("hidden"); playMusic(); };
 
-// Music play on any click
-document.querySelectorAll("button,input,select,textarea").forEach(el=>{ el.addEventListener("click", playMusic); });
-toggle.onclick=()=>{ music.paused?music.play().then(()=>toggle.classList.remove("paused")).catch(()=>{}): (music.pause(), toggle.classList.add("paused")); };
-function playMusic(){ if(music.paused) music.play().then(()=>toggle.classList.remove("paused")).catch(()=>{}); }
+// Initialize audio at 0 volume
+music.volume = 0;
+
+// Fade-in function
+function fadeInAudio(duration = 5000) { // duration in ms
+    let step = 0.01;
+    let intervalTime = duration / (1/step);
+    music.volume = 0;
+    music.play().then(() => {
+        const fade = setInterval(() => {
+            if (music.volume < 1) {
+                music.volume = Math.min(music.volume + step, 1);
+            } else {
+                clearInterval(fade);
+            }
+        }, intervalTime);
+    }).catch(() => {});
+}
+
+// Play music on any click with fade-in
+function playMusic() {
+    if (music.paused) {
+        fadeInAudio(3000);
+        toggle.classList.remove("paused");
+    }
+}
+
+// Music toggle button
+toggle.onclick = () => {
+    if (music.paused) {
+        fadeInAudio(3000);
+    } else {
+        music.pause();
+        toggle.classList.add("paused");
+    }
+};
+
+// Music play on any click (buttons, form fields)
+document.querySelectorAll("button,input,select,textarea").forEach(el => {
+    el.addEventListener("click", playMusic);
+});
 
 // RSVP form submission
 form.addEventListener("submit", async e=>{
     e.preventDefault();
     const res=await fetch("https://formspree.io/f/mqeeabjg", { method:"POST", body:new FormData(form), headers:{Accept:"application/json"} });
-    if(res.ok){ form.reset(); status.classList.add("show"); setTimeout(()=>{ status.classList.remove("show"); form.querySelector("button").disabled=false; }, 4000); }
-    else alert("Submission failed. Please try again.");
+    if(res.ok){
+        form.reset(); 
+        status.classList.add("show"); 
+        setTimeout(()=>{ status.classList.remove("show"); form.querySelector("button").disabled=false; }, 4000);
+    } else alert("Submission failed. Please try again.");
 });
 </script>
 
 </body>
 </html>
-
-
-
